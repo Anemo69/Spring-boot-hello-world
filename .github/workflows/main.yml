@@ -51,3 +51,13 @@ jobs:
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
           package: '*.jar'
+          
+       - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'springboothelloworld'
+          slot-name: 'stagging'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
+          package: '*.jar'   
+          
