@@ -39,7 +39,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         
-          steps:
+    
       - name: Checkout
         uses: actions/checkout@v2
       -
