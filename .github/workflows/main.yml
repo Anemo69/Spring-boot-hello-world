@@ -55,6 +55,7 @@ jobs:
           registry: myjfrogregistry2134.jfrog.io
           username: ${{ secrets.JFROG_USER}}
           password: ${{ secrets.JFROG_PASSWORD}}
+          # added secrets to github error solved
       -
         name: Build and push
         id: docker_build
