@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $(SERVICE_NAME)
+  labels:
+    app: $(SERVICE_NAME)
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: $(SERVICE_NAME)
+  template:
+    metadata:
+      labels:
+        app: $(SERVICE_NAME)
+    spec:
+      containers:
+      - name: $(SERVICE_NAME)
+        image: #__#ACR_SERVER_URL#__#/#__#IMAGE_REPO#__#/#__#IMAGE_NAME#__#:#__#BUILD_NUMBER#__#
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: acr-secret-001
