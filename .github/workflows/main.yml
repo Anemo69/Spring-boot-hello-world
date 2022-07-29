@@ -59,7 +59,7 @@ jobs:
       -
         name: Build and push
         id: docker_build
-        uses: dockerfile/build-push-action@v2
+        uses: docker/build-push-action@v2
         with:
           push: true
           tags: myjfrogregistry2134.jfrog.io/helloworldimage:latest   
