@@ -10,7 +10,7 @@ public class SpringBootHelloWorld {
  
     @RequestMapping("/")
     String home() {
-        return "Hello World Spring Boot!";
+        return "Hello World Spring Boot application deployed on azure app service on two environment dev and production!";
     }
  
     public static void main(String[] args) throws Exception {
