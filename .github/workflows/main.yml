@@ -88,7 +88,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'springboothelloworld'
+          app-name: 'springboothelloworldprod'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: '*.jar'
@@ -110,8 +110,8 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'springboothelloworld'
+          app-name: 'springboothelloworlddev'
           slot-name: 'development'
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE1 }}
           package: '*.jar'
           
