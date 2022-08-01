@@ -97,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'development'
+      name: production'
       url: ${{ steps.dev-to-webapp.outputs.webapp-url }}
     
     steps:
@@ -111,7 +111,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'springbootdev'
-          slot-name: 'development'
+          slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: '*.jar'
           
