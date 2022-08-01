@@ -62,7 +62,7 @@ jobs:
           uses: docker/build-push-action@v2
           with:
             push: true
-            tags: myjfrogregistry2134.jfrog.io/helloworldimage:latest   
+            tags: myjfrogregistry2134.jfrog.io/spring-boot-hello-world-1.0.0.jar:latest   
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
