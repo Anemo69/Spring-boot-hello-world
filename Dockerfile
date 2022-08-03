@@ -2,8 +2,8 @@ FROM openjdk:9
 
 WORKDIR /app
 
-ADD ./spring-boot-hello-world-1.0.0.jar .
+ADD ./**.jar .
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "spring-boot-hello-world-1.0.0.jar"]
+CMD ["java", "-jar", "**.jar"]
