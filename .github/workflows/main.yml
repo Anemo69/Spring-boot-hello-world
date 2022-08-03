@@ -93,6 +93,7 @@ jobs:
       - name: Download artifact from jfrog
         run: |
           curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -O "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
+          ls
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -101,7 +102,7 @@ jobs:
           app-name: 'springboothelloworld'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: '*.jar'
+          package: 'spring-boot-hello-world-1.0.0.jar'
         
   dev:
     runs-on: ubuntu-latest
