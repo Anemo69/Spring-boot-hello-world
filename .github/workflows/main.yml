@@ -61,7 +61,7 @@ jobs:
           id: docker_build
           uses: docker/build-push-action@v2
           with:
-            file: ./spring-boot-hello-world-1.0.0.jar .
+            file: ./Dockerfile
             push: true
             tags: myjfrogregistry2134.jfrog.io/spring-boot-hello-world-1.0.0.jar:latest   
 
