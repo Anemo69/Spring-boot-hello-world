@@ -67,7 +67,7 @@ jobs:
 
       - name: Upload artifact to jfrog
         run: |
-           curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -T ./**.jar "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
+           curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -T ./target/**.jar "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
     
 #       - name: Upload artifact for deployment job
 #         uses: actions/upload-artifact@v2
