@@ -2,7 +2,7 @@ FROM openjdk:9
 
 WORKDIR /app
 
-ADD ./spring-boot-hello-world-1.0.0.jar
+ADD ./spring-boot-hello-world-1.0.0.jar .
 
 EXPOSE 8080
 
