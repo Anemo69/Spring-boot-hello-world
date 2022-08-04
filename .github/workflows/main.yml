@@ -68,7 +68,14 @@ jobs:
       - name: Upload artifact to jfrog
         run: |
            cp ./target/**.jar helloworld.jar
-           curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -T helloworld.jar "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
+      -
+        name: Login to JFrog 
+        uses: docker/login-action@v1
+        with:
+          registry: myjfrogregistry2134.jfrog.io
+          username: ${{ secrets.JFROG_USER}}
+          password: ${{ secrets.JFROG_PASSWORD}}
+           curl  -T helloworld.jar "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
     
 #       - name: Upload artifact for deployment job
 #         uses: actions/upload-artifact@v2
