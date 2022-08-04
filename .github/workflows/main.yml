@@ -102,7 +102,7 @@ jobs:
           app-name: 'springboothelloworld'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: 'spring-boot-hello-world-1.0.0.jar'
+          package: '**.jar'
         
   dev:
     runs-on: ubuntu-latest
@@ -128,4 +128,4 @@ jobs:
           app-name: 'springbootdev'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: '*.jar'
+          package: '**.jar'
