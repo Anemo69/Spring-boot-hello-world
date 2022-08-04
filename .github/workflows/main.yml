@@ -86,10 +86,6 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: java-app
       - name: Download artifact from jfrog
         run: |
           curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
@@ -98,6 +94,11 @@ jobs:
           chmod 777 spring-boot-hello-world-1.0.0.jar
           pwd
       
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: java-app
+     
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
