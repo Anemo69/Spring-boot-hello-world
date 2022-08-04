@@ -61,7 +61,7 @@ jobs:
 #           id: docker_build
 #           uses: docker/build-push-action@v2
 #           with:
-#             file: ./Dockerfile
+#             file: ./*jar
 #             push: true
 #             tags: myjfrogregistry2134.jfrog.io/spring-boot-hello-world-1.0.0.jar:latest   
 
@@ -71,29 +71,12 @@ jobs:
            curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -T helloworld.jar "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
            ls
            pwd 
-      - name: Download artifact from jfrog
-        run: |
-          curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
-          ls
-          ls -l
-          whoami
-          chmod 777 spring-boot-hello-world-1.0.0.jar
-          pwd
-         
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+           
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
         with:
-          app-name: 'springbootdev'
-          #slot-name: 'production'
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: 'spring-boot-hello-world-1.0.0.jar'      
-#       - name: Upload artifact for deployment job
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: java-app
-#           path: '${{ github.workspace }}/target/*.jar'
+          name: java-app
+          path: '${{ github.workspace }}/target/*.jar'
           
   production:
     runs-on: ubuntu-latest
@@ -103,10 +86,10 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
-#       - name: Download artifact from build job
-#         uses: actions/download-artifact@v2
-#         with:
-#           name: java-app
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: java-app
       - name: Download artifact from jfrog
         run: |
           curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
@@ -131,6 +114,7 @@ jobs:
     environment:
       name: dev
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
@@ -151,6 +135,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'springbootdev'
-          #slot-name: 'production'
+          slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: 'spring-boot-hello-world-1.0.0.jar'
