@@ -102,7 +102,7 @@ jobs:
           app-name: 'springboothelloworld'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: 'spring-boot-hello-world-1.0.0.jar'
+          package: 'https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar'
         
   dev:
     runs-on: ubuntu-latest
