@@ -69,7 +69,9 @@ jobs:
         run: |
            cp ./target/**.jar helloworld.jar
            curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -T helloworld.jar "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
-    
+           ls
+           pwd 
+           
 #       - name: Upload artifact for deployment job
 #         uses: actions/upload-artifact@v2
 #         with:
@@ -91,7 +93,9 @@ jobs:
       - name: Download artifact from jfrog
         run: |
           curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
-         
+          ls
+          ls -l
+          pwd
       
 
       - name: Deploy to Azure Web App
