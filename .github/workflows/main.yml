@@ -112,15 +112,19 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-           name: java-app
+      #- name: Download artifact from build job
+       # uses: actions/download-artifact@v2
+        #with:
+         #  name: java-app
+       - name: Download artifact from jfrog
+         run: |
+          curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -O "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"   
+         
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
+       - name: Deploy to Azure Web App
+         id: deploy-to-webapp
+         uses: azure/webapps-deploy@v2
+         with:
           app-name: 'springbootdev'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
