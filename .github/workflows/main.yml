@@ -125,7 +125,10 @@ jobs:
           whoami
           chmod 777 spring-boot-hello-world-1.0.0.jar
           pwd
-     
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: java-app
   
          
 
