@@ -93,6 +93,8 @@ jobs:
       - name: Download artifact from jfrog
         run: |
           curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
+          ls
+          pwd
       
 
       - name: Deploy to Azure Web App
