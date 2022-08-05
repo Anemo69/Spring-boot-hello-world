@@ -39,6 +39,16 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         
+      - name: Import Secrets
+        uses: hashicorp/vault-action@v2.4.0
+        with:
+          url: http://20.85.173.168:8200/ui/vault/auth?redirect_to=%2Fvault%2Fsecrets%2Fado%2Flist&with=token
+          token: ${{ secrets.VAULT_TOKEN }}
+          caCertificate: ${{ secrets.VAULT_CA_CERT }}
+          secrets: |
+                    secret/data/ci/aws accessKey | AWS_ACCESS_KEY_ID ;
+                    secret/data/ci/aws secretKey | AWS_SECRET_ACCESS_KEY ;
+                    secret/data/ci npm_token  
     
 #       - name: Checkout
 #         uses: actions/checkout@v2
@@ -118,16 +128,7 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
-    - name: Import Secrets
-      uses: hashicorp/vault-action@v2.4.0
-      with:
-          url: http://20.85.173.168:8200/ui/vault/auth?redirect_to=%2Fvault%2Fsecrets%2Fado%2Flist&with=token
-          token: ${{ secrets.VAULT_TOKEN }}
-          caCertificate: ${{ secrets.VAULT_CA_CERT }}
-          secrets: |
-                    secret/data/ci/aws accessKey | AWS_ACCESS_KEY_ID ;
-                    secret/data/ci/aws secretKey | AWS_SECRET_ACCESS_KEY ;
-                    secret/data/ci npm_token
+  
     - name: Download artifact from jfrog
       run: |
           curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
