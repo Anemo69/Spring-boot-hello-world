@@ -44,11 +44,15 @@ jobs:
         with:
           url: http://20.85.173.168:8200/ui/vault/auth?redirect_to=%2Fvault%2Fsecrets%2Fado%2Flist&with=token
           token: ${{ secrets.VAULT_TOKEN }}
-          caCertificate: ${{ secrets.VAULT_CA_CERT }}
+          
           secrets: |
-                    secret/data/ci/aws accessKey | AWS_ACCESS_KEY_ID ;
-                    secret/data/ci/aws secretKey | AWS_SECRET_ACCESS_KEY ;
-                    secret/data/ci npm_token  
+                export VAULT_ADDR=$(VAULT_HOST)
+                export VAULT_SKIP_VERIFY="true"
+                set +x
+                export VAULT_TOKEN=$(vault write -field=token auth/approle/login role_id=$(VAULT_ROLE_ID) secret_id=$(VAULT_SEC_ID))
+                server=$(vault kv get -field=server ado/IDAConatinerSecret)
+                username=$(vault kv get -field=username ado/IDAConatinerSecret)
+                password=$(vault kv get -field=password ado/IDAConatinerSecret) 
     
 #       - name: Checkout
 #         uses: actions/checkout@v2
