@@ -68,7 +68,7 @@ jobs:
       - name: Upload artifact to jfrog
         run: |
            cp ./target/**.jar helloworld.jar
-           curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -T helloworld.jar "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
+           curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -T helloworld.jar "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
            ls
            pwd 
            
