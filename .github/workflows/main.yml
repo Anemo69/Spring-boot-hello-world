@@ -88,7 +88,7 @@ jobs:
     steps:
       - name: Download artifact from jfrog
         run: |
-          curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
+          curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
           ls
           ls -l
           chmod 777 spring-boot-hello-world-1.0.0.jar
@@ -119,7 +119,7 @@ jobs:
     steps:
       - name: Download artifact from jfrog
         run: |
-          curl -uadityakumar.tpr@pwc.com:PwcRocks!@#123 -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
+          curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
           ls
           ls -l
           whoami
