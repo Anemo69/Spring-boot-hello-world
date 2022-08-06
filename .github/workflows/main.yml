@@ -42,11 +42,12 @@ jobs:
       - name: Import Secrets from vault
         uses: hashicorp/vault-action@v2.4.0
         with:
-          url: http://20.85.173.168:8200/ui/vault/auth?redirect_to=%2Fvault%2Fsecrets%2Fado%2Flist&with=token
+          url: http://20.85.173.168:8200/
           token: ${{ secrets.VAULT_TOKEN }}
           
           secrets: |
-                 export VAULT_ADDR=$(VAULT_HOST)
+                 export VAULT_ADDR="http://20.85.173.168:8200/"
+                 export VAULT_TOKEN="s.jarxFvvDpqakav6O4DihWib0"
                  export VAULT_SKIP_VERIFY="true"
                  set +x
                  export VAULT_TOKEN=$(vault write -field=token auth/approle/login role_id=$(VAULT_ROLE_ID) secret_id=$(VAULT_SEC_ID))
