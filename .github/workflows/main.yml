@@ -43,13 +43,13 @@ jobs:
         uses: hashicorp/vault-action@v2.4.0
        
         with:
-          url: ${{ secrets.VAULT_HOST }}
-          token: ${{ secrets.VAULT_TOKEN }}
-          run: vault secrets enable kv-v2
-          
-          secrets: |
-               vault kv get -field=username ado/Github-actions/JFrog-Secrets  | jfrog-username.sh;
-               vault kv get -field=password ado/Github-actions/JFrog-Secrets  | jfrog-password.sh
+        url: ${{ secrets.VAULT_HOST }}
+        method: approle
+        roleId: ${{ secrets.VAULT_ROLE_ID }}
+        secretId: ${{ secrets.VAULT_SECRET_ID }}
+        token: ${{ secrets.VAULT_TOKEN }}
+    secrets: |
+              
     
     
       - name: Upload artifact to jfrog
