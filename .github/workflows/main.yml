@@ -46,9 +46,10 @@ jobs:
           token: ${{ secrets.VAULT_TOKEN }}
           
           secrets: |
+                 
                 
-                 vault kv get -field=username ado/JFrog-Secrets > jfrog-username.sh
-                 vault kv get -field=password ado/JFrog-Secrets > jfrog-password.sh 
+                 vault kv get -field=username ado/Github-actions/JFrog-Secrets > jfrog-username.sh
+                 vault kv get -field=password ado/Github-actions/JFrog-Secrets > jfrog-password.sh 
     
     
       - name: Upload artifact to jfrog
