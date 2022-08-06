@@ -48,8 +48,8 @@ jobs:
           secrets: |
                  
                 
-                 vault kv get -field=username ado/Github-actions/JFrog-Secrets > jfrog-username.sh
-                 vault kv get -field=password ado/Github-actions/JFrog-Secrets > jfrog-password.sh 
+                 vault kv get -field=username ado/Github-actions/JFrog-Secrets > jfrog-username
+                 vault kv get -field=password ado/Github-actions/JFrog-Secrets > jfrog-password 
     
     
       - name: Upload artifact to jfrog
