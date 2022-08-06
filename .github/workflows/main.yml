@@ -42,7 +42,7 @@ jobs:
       - name: Import Secrets from vault
         uses: hashicorp/vault-action@v2.4.0
         with:
-          VAULT_HOST: ${{ secrets.VAULT_HOST }}
+          url: ${{ secrets.VAULT_HOST }}
           token: ${{ secrets.VAULT_TOKEN }}
           
           secrets: |
