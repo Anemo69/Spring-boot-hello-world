@@ -39,7 +39,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         
-      - name: Import Secrets
+      - name: Import Secrets from vault
         uses: hashicorp/vault-action@v2.4.0
         with:
           url: http://20.85.173.168:8200/ui/vault/auth?redirect_to=%2Fvault%2Fsecrets%2Fado%2Flist&with=token
