@@ -46,13 +46,8 @@ jobs:
           token: ${{ secrets.VAULT_TOKEN }}
           
           secrets: |
-                 VAULT_HOST: ${{ secrets.VAULT_HOST }}
-                 VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}
-                 export VAULT_SKIP_VERIFY="true"
-                 set +x
-                 export VAULT_TOKEN=$(vault write -field=token auth/approle/login role_id=$(VAULT_ROLE_ID) secret_id=$(VAULT_SEC_ID))
-                 vault kv get -field=username ado/Github-actions/JFrog-Secrets > jfrog-username
-                 vault kv get -field=password ado/Github-actions/JFrog-Secrets > jfrog-password 
+                  ado/Github-actions/JFrog-Secrets > jfrog-username
+                  ado/Github-actions/JFrog-Secrets > jfrog-password 
     
     
       - name: Upload artifact to jfrog
