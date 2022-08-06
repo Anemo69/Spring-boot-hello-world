@@ -41,23 +41,22 @@ jobs:
         
       - name: Import Secrets from vault
         uses: hashicorp/vault-action@v2.4.0
-       
         with:
-        url: ${{ secrets.VAULT_HOST }}
-        method: approle
-        roleId: ${{ secrets.VAULT_ROLE_ID }}
-        secretId: ${{ secrets.VAULT_SECRET_ID }}
-        token: ${{ secrets.VAULT_TOKEN }}
-    secrets: |
-              
-    
-    
+             url: ${{ secrets.VAULT_HOST }}
+             method: approle
+             roleId: ${{ secrets.VAULT_ROLE_ID }}
+             secretId: ${{ secrets.VAULT_SECRET_ID }}
+             token: ${{ secrets.VAULT_TOKEN }}
+             secrets: |
+                        secrets/ado/Github-actions/Jfrog-secrets  |jfrog-username.sh;
+                        secrets/ado/Github-actions/Jfrog-secrets  |jfrog-password.sh;
+            
       - name: Upload artifact to jfrog
         run: |
            cp ./target/**.jar helloworld.jar
            curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -T helloworld.jar "https://myjfrogregistry2134.jfrog.io/artifactory/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
            ls
-           pwd 
+           pwd  
            
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
