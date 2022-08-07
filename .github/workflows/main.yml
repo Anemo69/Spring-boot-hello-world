@@ -61,7 +61,7 @@ jobs:
       envUrl: https://springbootdev.azurewebsites.net
       slotName: "production"
      secrets:
-      azureWebAppPublishProfile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+      azureWebAppPublishProfile: ${{ secrets.AZURE_PUBLISH_PROFILE_DEV }}
   
 #   dev:
 #     runs-on: ubuntu-latest
@@ -99,14 +99,14 @@ jobs:
 
           
   production:
-     uses: Anemo69/Spring-boot-hello-world/.github/workflows/reusable.yml@master
+     uses: Anemo69/Spring-boot-hello-world/.github/workflows/reusableforprod.yml@master
      needs: dev
      with:
       envName: production
       envUrl: https://springboothelloworld.azurewebsites.net
       slotName: "production"
      secrets:
-      azureWebAppPublishProfile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+      azureWebAppPublishProfile: ${{ secrets.AZURE_PUBLISH_PROFILE_PROD }}
      
 #     runs-on: ubuntu-latest
 #     needs: dev
