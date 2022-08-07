@@ -1,0 +1,60 @@
+name: Build and deploy JAR app to Azure Web App - springboothelloworld
+
+on:
+   workflow_call:
+     inputs:
+       envName:
+           description: "the environment to deploy to (dev or production)"
+           required: true
+           default: "dev"
+           type: string
+       envUrl:
+           description: "the URL to deploy to"
+           required: true
+           default: https://springboothelloworld.azurewebsites.net
+           type: string
+       slotName:
+           description: "the azure web app slot to deploy to"
+           required: true
+           default: "production"
+           type: string
+     secrets:
+      azureWebAppPublishProfile:
+        required: true
+jobs:
+ dev:
+     
+   name: deploy to ${{ inputs.releaseType }}
+   environment:
+    name: ${{ inputs.envName }}
+    url: ${{ inputs.envUrl }}
+   runs-on: ubuntu-latest 
+      
+   steps:
+    - name: Download artifact from jfrog
+      run: |
+          curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
+          ls
+          ls -l
+          whoami
+          chmod 777 spring-boot-hello-world-1.0.0.jar
+          pwd
+    
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+          name: java-app
+  
+         
+
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+          app-name: 'springboothelloworld'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: 'spring-boot-hello-world-1.0.0.jar'
+          
+ 
+   
