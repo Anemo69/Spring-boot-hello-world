@@ -55,6 +55,7 @@ jobs:
           path: '${{ github.workspace }}/target/*.jar'
   dev:
      uses: Anemo69/Spring-boot-hello-world/.github/workflows/reusable.yml@master
+     needs: build
      with:
       envName: dev
       envUrl: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -99,6 +100,7 @@ jobs:
           
   production:
      uses: Anemo69/Spring-boot-hello-world/.github/workflows/reusable.yml@master
+     needs: dev
      with:
       envName: production
       envUrl: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
