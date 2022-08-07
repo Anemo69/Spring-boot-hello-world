@@ -53,7 +53,7 @@ jobs:
       with:
           app-name: 'springboothelloworld'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_PROD }}
           package: 'spring-boot-hello-world-1.0.0.jar'
           
  
