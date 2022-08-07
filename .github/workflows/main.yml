@@ -58,7 +58,7 @@ jobs:
      needs: build
      with:
       envName: dev
-      envUrl: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      envUrl: https://springbootdev.azurewebsites.net
       slotName: "production"
      secrets:
       azureWebAppPublishProfile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
@@ -103,7 +103,7 @@ jobs:
      needs: dev
      with:
       envName: production
-      envUrl: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      envUrl: https://springboothelloworld.azurewebsites.net
       slotName: "production"
      secrets:
       azureWebAppPublishProfile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
