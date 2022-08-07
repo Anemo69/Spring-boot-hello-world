@@ -1,18 +1,41 @@
 name: Build and deploy JAR app to Azure Web App - springboothelloworld
 
 on:
- workflow_call:
+   workflow_call:
+     inputs:
+       envName:
+           description: "the environment to deploy to (dev or production)"
+           required: true
+           default: "dev"
+           type: string
+       envUrl:
+           description: "the URL to deploy to"
+           required: true
+           default: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+           type: string
+       slotName:
+           description: "the azure web app slot to deploy to"
+           required: true
+           default: "dev"
+           type: string
+     secrets:
+      azureWebAppPublishProfile:
+        required: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
+  deploy:
+     
+      name: deploy to ${{ inputs.releaseType }}
+      environment:
+       name: ${{ inputs.envName }}
+       url: ${{ inputs.envUrl }}
+      runs-on: ubuntu-latest
+      steps:
       - uses: actions/checkout@v2
   
   dev:
     runs-on: ubuntu-latest
-    needs: build
+    
     environment:
       name: dev
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
