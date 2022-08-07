@@ -11,7 +11,7 @@ on:
        envUrl:
            description: "the URL to deploy to"
            required: true
-           default: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+           default: https://springbootdev.azurewebsites.net
            type: string
        slotName:
            description: "the azure web app slot to deploy to"
