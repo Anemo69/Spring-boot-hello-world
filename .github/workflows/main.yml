@@ -53,89 +53,90 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
+
+  
   dev:
-     uses: Anemo69/Spring-boot-hello-world/.github/workflows/reusable.yml@master
-     needs: build
-     with:
-      envName: dev
-      envUrl: https://springbootdev.azurewebsites.net
-      slotName: "production"
-     secrets:
-      azureWebAppPublishProfile: ${{ secrets.AZURE_PUBLISH_PROFILE_DEV }}
-  
-#   dev:
-#     runs-on: ubuntu-latest
-#     needs: build
-#     environment:
-#       name: dev
-#       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: dev
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
-#     steps:
+    steps:
   
-#     - name: Download artifact from jfrog
-#       run: |
-#           curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
-#           ls
-#           ls -l
-#           whoami
-#           chmod 777 spring-boot-hello-world-1.0.0.jar
-#           pwd
+    - name: Download artifact from jfrog
+      run: |
+          curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
+          ls
+          ls -l
+          whoami
+          chmod 777 spring-boot-hello-world-1.0.0.jar
+          pwd
     
-#     - name: Download artifact from build job
-#       uses: actions/download-artifact@v2
-#       with:
-#           name: java-app
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+          name: java-app
   
          
 
-#     - name: Deploy to Azure Web App
-#       id: deploy-to-webapp
-#       uses: azure/webapps-deploy@v2
-#       with:
-#           app-name: 'springbootdev'
-#           slot-name: 'production'
-#           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-#           package: 'spring-boot-hello-world-1.0.0.jar'
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+          app-name: 'springbootdev'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_DEV }}
+          package: 'spring-boot-hello-world-1.0.0.jar'
 
           
-  production:
-     uses: Anemo69/Spring-boot-hello-world/.github/workflows/reusableforprod.yml@master
-     needs: dev
-     with:
-      envName: production
-      envUrl: https://springboothelloworld.azurewebsites.net
-      slotName: "production"
-     secrets:
-      azureWebAppPublishProfile: ${{ secrets.AZURE_PUBLISH_PROFILE_PROD }}
-     
-#     runs-on: ubuntu-latest
-#     needs: dev
-#     environment:
-#       name: 'production'
-#       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+  Production: 
+    runs-on: ubuntu-latest
+    needs: dev
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
-#     steps:
-#       - name: Download artifact from jfrog
-#         run: |
-#           curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
-#           ls
-#           ls -l
-#           chmod 777 spring-boot-hello-world-1.0.0.jar
-#           pwd
+    steps:
+      - name: Download artifact from jfrog
+        run: |
+          curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
+          ls
+          ls -l
+          chmod 777 spring-boot-hello-world-1.0.0.jar
+          pwd
       
-#       - name: Download artifact from build job
-#         uses: actions/download-artifact@v2
-#         with:
-#           name: java-app
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: java-app
      
 
-#       - name: Deploy to Azure Web App
-#         id: deploy-to-webapp
-#         uses: azure/webapps-deploy@v2
-#         with:
-#           app-name: 'springboothelloworld'
-#           slot-name: 'production'
-#           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-#           package: 'spring-boot-hello-world-1.0.0.jar'
-        
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'springboothelloworld'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_PROD }}
+          package: 'spring-boot-hello-world-1.0.0.jar'
+  #   dev:
+#      uses: Anemo69/Spring-boot-hello-world/.github/workflows/reusable.yml@master
+#      needs: build
+#      with:
+#       envName: dev
+#       envUrl: https://springbootdev.azurewebsites.net
+#       slotName: "production"
+#      secrets:
+#       azureWebAppPublishProfile: ${{ secrets.AZURE_PUBLISH_PROFILE_DEV }}        
+  #   production:
+#      uses: Anemo69/Spring-boot-hello-world/.github/workflows/reusableforprod.yml@master
+#      needs: dev
+#      with:
+#       envName: production
+#       envUrl: https://springboothelloworld.azurewebsites.net
+#       slotName: "production"
+#      secrets:
+#       azureWebAppPublishProfile: ${{ secrets.AZURE_PUBLISH_PROFILE_PROD }}      
  
