@@ -21,27 +21,16 @@ on:
      secrets:
       azureWebAppPublishProfile:
         required: true
-
 jobs:
-  deploy:
+ dev:
      
-      name: deploy to ${{ inputs.releaseType }}
-      environment:
-       name: ${{ inputs.envName }}
-       url: ${{ inputs.envUrl }}
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v2
-  
-  dev:
-    runs-on: ubuntu-latest
-    
-    environment:
-      name: dev
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
-    steps:
-  
+   name: deploy to ${{ inputs.releaseType }}
+   environment:
+    name: ${{ inputs.envName }}
+    url: ${{ inputs.envUrl }}
+   runs-on: ubuntu-latest 
+      
+   steps:
     - name: Download artifact from jfrog
       run: |
           curl -u${{ secrets.JFROG_USER}}:${{ secrets.JFROG_PASSWORD}} -O "https://myjfrogregistry2134.jfrog.io/ui/native/java-springboot-app-generic-local/spring-boot-hello-world-1.0.0.jar"
